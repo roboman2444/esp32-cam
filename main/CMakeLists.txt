@@ -8,6 +8,7 @@ idf_component_register(
          "app_httpd.c"
          "app_lcd.c"
          "app_sntp.c"
+         "app_roomba.c"
     REQUIRES esp32-camera
              esp-idf-ssd1306
              mdns

@@ -85,6 +85,15 @@ menu "SNTP Configuration"
             
 endmenu
 
+menu "Roomba"
+config ROOMBA_ENABLED
+    bool "Roomba Enabled"
+    default n
+    help
+    Enable an Roomba
+endmenu
+
+
 menu "LED Illuminator"
 config LED_ILLUMINATOR_ENABLED
     bool "LED Illuminator Enabled"

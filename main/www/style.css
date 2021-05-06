@@ -55,6 +55,19 @@ nav.menu {
   margin-right: 10px;
   margin-bottom: 10px;
 }
+nav.controlls {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-width: 200px;
+  height: auto;
+  background: #363636;
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: -10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
 
 figure {
   padding: 0px;

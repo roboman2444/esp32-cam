@@ -271,6 +271,36 @@
                     </div>
                     <a href="#" id="stream-window-link" target="_blank">Open Stream in New Window</a>
                 </figure>
+
+		<!-- roomba controlls -->
+		<nav id="controlls" class="controlls">
+                      <button id="roomba_forward">Forward</button>
+                      <button id="roomba_reverse">Back</button>
+                      <button id="roomba_left">Left</button>
+                      <button id="roomba_right">Right</button>
+                      <button id="roomba_stop">Stop</button>
+                      <div class="input-group" id="roomba_speed-group">
+                          <label for="roomba_speed">Speed</label>
+                          <output name="roomba_speed_out" id="roomba_speed_out" for="roomba_speed">200</output>
+                          <div class="range-min">1</div>
+                          <input type="range" id="roomba_speed" min="1" max="500" value="200" oninput="roomba_speed_out.value=roomba_speed.value">
+                          <div class="range-max">500</div>
+                      </div>
+                      <div class="input-group" id="roomba_tspeed-group">
+                          <label for="roomba_speed">Turn Speed</label>
+                          <output name="roomba_tspeed_out" id="roomba_tspeed_out" for="roomba_tspeed">100</output>
+                          <div class="range-min">1</div>
+                          <input type="range" id="roomba_tspeed" min="1" max="500" value="100" oninput="roomba_tspeed_out.value=roomba_tspeed.value">
+                          <div class="range-max">500</div>
+                      </div>
+                      <button id="roomba_connect">Connect</button>
+                      <button id="roomba_safe">Safe</button>
+                      <button id="roomba_clean">Clean</button>
+                      <button id="roomba_dock">Dock</button>
+                      <button id="roomba_poweroff">Poweroff</button>
+
+		</nav>
+
             </section> <!-- content -->
         </section> <!-- main -->
     </body>

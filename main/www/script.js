@@ -201,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             })
     }
 
+
     // Attach actions to buttons
 
     restoreButton.onclick = () => {
@@ -317,3 +318,93 @@ document.addEventListener('DOMContentLoaded', function(event) {
     fetchSettings()
     startStream()
 })
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function(event) {
+	var baseHost = document.location.origin;
+	const roombaSpeed = document.getElementById('roomba_speed')
+	const roombaTSpeed = document.getElementById('roomba_tspeed')
+	const roombaForward = document.getElementById('roomba_forward')
+	const roombaReverse = document.getElementById('roomba_reverse')
+	const roombaLeft = document.getElementById('roomba_left')
+	const roombaRight = document.getElementById('roomba_right')
+	const roombaStop = document.getElementById('roomba_stop')
+	const roombaConnect = document.getElementById('roomba_connect')
+	const roombaSafe = document.getElementById('roomba_safe')
+	const roombaClean = document.getElementById('roomba_clean')
+	const roombaDock = document.getElementById('roomba_dock')
+	const roombaPoweroff = document.getElementById('roomba_poweroff')
+
+	function roombaDrive(vel, rad) {
+		const query = `${baseHost}/control?var=roomba_drive&val=${vel},${rad}`
+		fetch(query) .then(response => {
+			console.log(`request to ${query} finished, status: ${response.status}`)
+		})
+	}
+	function roombaCtrl(action) {
+		const query = `${baseHost}/control?var=${action}&val=0`
+		fetch(query) .then(response => {
+			console.log(`request to ${query} finished, status: ${response.status}`)
+		})
+	}
+
+	roombaForward.onclick = () => {
+		roombaDrive(roombaSpeed.value, 0)
+	}
+	roombaReverse.onclick = () => {
+		roombaDrive( -1 * roombaSpeed.value, 0)
+	}
+	roombaLeft.onclick = () => {
+		roombaDrive(roombaTSpeed.value, 1)
+	}
+	roombaRight.onclick = () => {
+		roombaDrive(roombaTSpeed.value, -1)
+	}
+	roombaStop.onclick = () => {
+		roombaDrive(0, 0)
+	}
+
+	roombaConnect.onclick = () => {
+		roombaCtrl("roomba_connect")
+	}
+	roombaSafe.onclick = () => {
+		roombaCtrl("roomba_safe")
+	}
+	roombaClean.onclick = () => {
+		roombaCtrl("roomba_clean")
+	}
+	roombaDock.onclick = () => {
+		roombaCtrl("roomba_dock")
+	}
+	roombaPoweroff.onclick = () => {
+		roombaCtrl("roomba_poweroff")
+	}
+
+
+	document.onkeydown = checkKey;
+	function checkKey(e) {
+		e = e || window.event;
+		switch(e.key){
+			case "ArrowUp":
+				roombaDrive(roombaSpeed.value, 0)
+			break;
+			case "ArrowDown":
+				roombaDrive(-1 * roombaSpeed.value, 0)
+			break;
+			case "ArrowLeft":
+				roombaDrive(roombaTSpeed.value, 1)
+			break;
+			case "ArrowRight":
+				roombaDrive(roombaTSpeed.value, -1)
+			break;
+			default:
+				roombaDrive(0,0);
+		}
+	}
+
+})
+
+
