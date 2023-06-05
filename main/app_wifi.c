@@ -214,14 +214,17 @@ void app_wifi_startup() {
 
     wifi_init_sta();
     ESP_ERROR_CHECK(esp_wifi_start());
+/*
     wifi_country_t wifi_country = {
-        .cc = "",
+        .cc = "US",
         .schan = 1,
         .nchan = 11,
         .max_tx_power = 78,
         .policy = WIFI_COUNTRY_POLICY_AUTO
     };
     ESP_ERROR_CHECK(esp_wifi_set_country(&wifi_country));
+*/
+	esp_wifi_set_country_code("US", false);
     // ESP_ERROR_CHECK(esp_wifi_set_max_tx_power(78)); 
 }
 

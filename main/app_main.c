@@ -25,9 +25,6 @@ void app_shutdown() {
   #ifdef CONFIG_USE_SSD1306_LCD_DRIVER
   app_lcd_shutdown();
   #endif
-  #ifdef CONFIG_ROOMBA_ENABLED
-  app_roomba_shutdown();
-  #endif
   #ifdef CONFIG_LED_ILLUMINATOR_ENABLED
   app_illuminator_shutdown();
   #endif
@@ -37,6 +34,9 @@ void app_shutdown() {
   app_httpd_shutdown();
   app_wifi_shutdown();
   app_camera_shutdown();
+  #ifdef CONFIG_ROOMBA_ENABLED
+  app_roomba_shutdown();
+  #endif
 }
 
 void app_main()
@@ -47,15 +47,15 @@ void app_main()
   event_group = xEventGroupCreate();
 
   app_settings_startup();
-  #ifdef CONFIG_ROOMBA_ENABLED
-  app_roomba_startup();
-  #endif
 
 
 //  app_settings_reset();
 //  app_settings_save();
 
   app_camera_startup();
+  #ifdef CONFIG_ROOMBA_ENABLED
+  app_roomba_startup();
+  #endif
   #ifdef CONFIG_LED_ILLUMINATOR_ENABLED
   app_illuminator_startup();
   #endif
