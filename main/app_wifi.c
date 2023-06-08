@@ -225,7 +225,7 @@ void app_wifi_startup() {
     ESP_ERROR_CHECK(esp_wifi_set_country(&wifi_country));
 */
 	esp_wifi_set_country_code("US", false);
-    // ESP_ERROR_CHECK(esp_wifi_set_max_tx_power(78)); 
+ //    ESP_ERROR_CHECK(esp_wifi_set_max_tx_power(78));
 }
 
 void app_wifi_shutdown() {

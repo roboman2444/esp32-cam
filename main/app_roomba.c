@@ -26,14 +26,16 @@ void roomba_safety( void * pvParameters ){
 	while(1){
 		vTaskDelay(1000 / portTICK_PERIOD_MS);
 		if(safetywaits == 0){
+			ESP_LOGI(TAG,"SAFETYWAITS HIT");
 			app_roomba_drive(0, 0x8000);	//this call will safetywaits--
-		} else if(safetywaits > 0) safetywaits--;
+		} if(safetywaits >= 0) safetywaits--;
 		if(powerwaits == 0){
+			ESP_LOGI(TAG,"POWERWAITS HIT");
 //			app_roomba_safe();
 //			vTaskDelay(100 / portTICK_PERIOD_MS);
 			app_roomba_poweroff();
 //			powerwaits = ROOMBAPOWERPACK;
-		} else if(powerwaits > 0) powerwaits--;
+		} if(powerwaits >= 0) powerwaits--;
 	}
 }
 
@@ -87,10 +89,13 @@ static char drivesci	= 0x89;
 
 
 void app_roomba_safe(){
+	ESP_LOGI(TAG,"app_roomba_safe");
 	uart_write_bytes(UART_NUM_1, &safesci, 1);
 //	uart_wait_tx_done(UART_NUM_1, 100);
 }
 void app_roomba_connect(){
+	ESP_LOGI(TAG,"app_roomba_connect");
+
 //	uart_wait_tx_done(UART_NUM_1, 100);
 	gpio_set_level(ROOMBAENPIN, 1);
 	vTaskDelay(100 / portTICK_PERIOD_MS);
@@ -105,6 +110,8 @@ void app_roomba_connect(){
 	powerwaits = ROOMBAPOWERPACK;
 }
 void app_roomba_poweroff(){
+	ESP_LOGI(TAG,"app_roomba_poweroff");
+
 	uart_write_bytes(UART_NUM_1, &powersci, 1);
 //	uart_wait_tx_done(UART_NUM_1, 100);
 	vTaskDelay(100 / portTICK_PERIOD_MS);
@@ -112,11 +119,15 @@ void app_roomba_poweroff(){
 }
 
 void app_roomba_dock(){
+	ESP_LOGI(TAG,"app_roomba_dock");
+
 	uart_write_bytes(UART_NUM_1, &docksci, 1);
 //	uart_wait_tx_done(UART_NUM_1, 100);
 	powerwaits = ROOMBAPOWERPACKDOCK;
 }
 void app_roomba_clean(){
+	ESP_LOGI(TAG,"app_roomba_clean");
+
 	uart_write_bytes(UART_NUM_1, &cleansci, 1);
 //	uart_wait_tx_done(UART_NUM_1, 100);
 	powerwaits = ROOMBAPOWERPACKDOCK;
@@ -129,6 +140,7 @@ void app_roomba_forcedock(){
 }
 
 void app_roomba_shutdown() {
+	ESP_LOGI(TAG,"ROOMBY SHUTDOWN");
 	if(safetytask){
 		vTaskDelete(safetytask);
 	}
